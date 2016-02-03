@@ -106,6 +106,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         String selectQuery = "SELECT  * FROM " + TABLE_NAME;
         Log.d(TAG, selectQuery);
         SQLiteDatabase db = this.getReadableDatabase();
+        
         Cursor c = db.rawQuery(selectQuery, null);
         if (c.moveToFirst()) {
             do {
