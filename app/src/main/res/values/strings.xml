@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Homotel</string>
+    <string-array name="months">
+        <item>JAN</item>
+        <item>FEB</item>
+        <item>MAR</item>
+        <item>APR</item>
+        <item>MAY</item>
+        <item>JUN</item>
+        <item>JULI</item>
+        <item>AUG</item>
+        <item>SEP</item>
+        <item>OCT</item>
+        <item>NOV</item>
+        <item>DEC</item>
+    </string-array>
+    <string-array name="time">
+        <item>AM</item>
+        <item>PM</item>
+
+    </string-array>
+
+
 </resources>

@@ -16,6 +16,11 @@
             </intent-filter>
 
         </activity>
+        <activity
+            android:name=".Sucess"
+            android:theme="@style/AppTheme">
+
+        </activity>
         <activity android:name=".CustomerRegestration"
             android:theme="@style/FormTheme"/>
     </application>
