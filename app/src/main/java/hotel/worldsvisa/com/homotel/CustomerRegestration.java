@@ -6,8 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by PROPHET on 31-01-2016.
@@ -16,7 +21,10 @@ public class CustomerRegestration extends AppCompatActivity {
     /******************
      * Data Sets Used *
      ******************/
+    List<table> tableList = new ArrayList<table>();
+
     Spinner spin_month, spin_ampm, spin_min, spin_date, spin_person, spin_hour;
+    Button submit;
     EditText name, email;
     String emaila, namea, timea, datea, persona;
     public static String[] hour = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12 "};
@@ -24,7 +32,7 @@ public class CustomerRegestration extends AppCompatActivity {
     public static String[] ampm = {"PM", "AM"};
     public static String[] person = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
     public static String[] minutes = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"};
-    public static String[] date = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+    public static String[] date = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 
 
     /*******************/
@@ -71,10 +79,30 @@ public class CustomerRegestration extends AppCompatActivity {
 
         name = (EditText) findViewById(R.id.name);
         email = (EditText) findViewById(R.id.email);
+        submit = (Button) findViewById(R.id.button);
+        submit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                table cust = new table();
+                setDateEntries();
+                cust.db_name = namea;
+                cust.db_time = timea;
+                cust.db_email = emaila;
+                cust.db_date = datea;
+                cust.db_nop = persona;
+
+                db.addtable(cust);
+                tableList = db.getAllCustomers();
+                Intent i = new Intent(CustomerRegestration.this, Sucess.class);
+                i.putExtra("listdb", (Serializable) tableList);
+                startActivity(i);
+
+            }
+        });
 
 
     }
-
 
     private String setTheString(final Spinner spinner) {
         final Object[] abc = new Object[1];
@@ -95,20 +123,6 @@ public class CustomerRegestration extends AppCompatActivity {
         return abc.toString();
     }
 
-    public void submit(View view) {
-        table table = new table();
-        setDateEntries();
-        table.db_name = namea;
-        table.db_time = timea;
-        table.db_email = emaila;
-        table.db_date = datea;
-        table.db_nop = persona;
-        db.addtable(table);
-        Intent i = new Intent(CustomerRegestration.this, Sucess.class);
-        startActivity(i);
-
-
-    }
 
     private void setDateEntries() {
         emaila = email.getText().toString();

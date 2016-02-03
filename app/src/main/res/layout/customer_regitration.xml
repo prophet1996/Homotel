@@ -121,7 +121,6 @@
         android:layout_height="wrap_content"
         android:text="SUBMIT"
         android:id="@+id/button"
-        android:onClick="submit"
         android:nestedScrollingEnabled="false" />
 
 
